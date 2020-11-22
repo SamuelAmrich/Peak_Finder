@@ -1,0 +1,29 @@
+Kód pre Python 3.8
+Je potrebné mať nainštalované knižnice pre python numpy, pandas, matplotlib, scipy
+
+#Všetky parametre využívané na nastavenie vyhľadávania
+
+manual = "E5" # None pre prejdenie všetkých dát, alebo špecifikovať názov pre jeden konkrétny set ~ 20s/set
+
+gauss_data = 801 //Určuje rozpätie pre kĺzavý priemer pre dáta
+gauss_dot1 = 201 //Určuje rozpätie pre kĺzavý priemer pre prvú deriváciu
+gauss_dot2 = 101 //Určuje rozpätie pre kĺzavý priemer pre druhú deriváciu
+
+basic_mode = True //ci v vyhladenych datach abo ne (true=nevyhladene, False=vyhladene)
+basic_find = None //Ci hladame horne, dolne alebo obe peak-y
+basic_triggp = 0.15 //Normovaná hodnota v kladných číslach, ktorú musí peak spĺňať
+basic_triggm = -0.15 //Normovaná hodnota v zapornych číslach, ktorú musí peak spĺňať
+basic_trigg = 0.20 //Normovaná hodnota rozdielu medzi 2 peakmi ktou musia splnať
+basic_radius = 1000 //Urcuje mieru volnosti pri hladani peaku
+basic_binn_data = 100 //Urcuje na kolko hodnot sa binnuje zaznam
+basic_binn_dot1 = 10 //Urcuje na kolko hodnot sa binnuje prva derivacia
+basic_binn_dot2 = 5 //Urcuje na kolko hodnot sa binnuje druha derivacia
+
+directory = "E:/Projekty/UFA/" //Sem sa da plna cesta k datam
+
+Peaky sú hľadané tak, že celé dáta sa normujú, vyhlôadia kĺzavým priemerom, následne sa dvakrat derivujú, 
+Derivácie sa taktieź normujú a vyhladzujú kĺzavým priemerom, 
+Následne sa derivácie binujú
+Potom hľadáme body kde je prvá derivácia rovná nule, a druhá derivácia nám určuje či je to minimum alebo maximum
+Keď máme nájdene takto body, tak potom v reálnych dátach hľadáme v okolí o šírke (2*radius) maximum tohto useku, to exportujeme ako spravnu hodnotu peak,
+To yplotuje, ulozime ako png obrazok a ako txt subor kde je dvojica Čas - Hodnota
